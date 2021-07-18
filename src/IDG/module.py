@@ -34,13 +34,11 @@ class Module:
 
     def _asJson(self):
         json = JsonObject()
-        moduleContent = JsonObject()
-        setattr(json, self.name, moduleContent)
 
-        moduleContent.version = self.version
-        moduleContent.type = self.type
-        moduleContent.status = self.status
-        moduleContent.restartPolicy = self.restartPolicy
+        json.version = self.version
+        json.type = self.type
+        json.status = self.status
+        json.restartPolicy = self.restartPolicy
 
         envDict = {}
         for key,val in self.__env.items():
@@ -48,11 +46,11 @@ class Module:
                 "value": val
             }
 
-        moduleContent.env = envDict
+        json.env = envDict
 
 
 
-        settings = moduleContent.settings = JsonObject()
+        settings = json.settings = JsonObject()
         settings.image = self.image
         settings.createOptions = self.createOptions
 

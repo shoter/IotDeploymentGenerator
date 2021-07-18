@@ -79,14 +79,11 @@ class Deployment:
 
 
 
-        moduleJsonObjs = []
+        moduleJsonObjs = {}
         for m in self.modules:
-            moduleJsonObjs.append(m._asJson())
-        test = JsonObject()
-        test.dupa = moduleJsonObjs
+            moduleJsonObjs[m.name] = m._asJson()
 
 
-        json.modulesContent = {}
         json.modulesContent["$edgeAgent"] = {
             "properties.desired": {
                 "schemaVersion": "1.0",
@@ -142,11 +139,13 @@ class Deployment:
         }
 
 
-        setattr(json, "$edgeHub", self.routeSettings._asJson())
+        json.modulesContent["$edgeHub"] = self.routeSettings._asJson()
 
         for m in self.modules:
             if m.desiredProperties:
-                setattr(json, m.name, m.desiredProperties)
+                json.modulesContent[m.name] = {
+                    "properties.desired": m.desiredProperties
+                }
 
         return json
 
