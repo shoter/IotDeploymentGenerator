@@ -1,9 +1,9 @@
+from __future__ import annotations
 from typing import Dict
-from IDG import jsonObject
-from IDG.jsonObject import JsonObject
+from jsonObject import JsonObject
 from routeSettings import RouteSettings
 from module import Module
-from __future__ import annotations
+
 
 class RegistryCredential:
     def __init__(self, address, username, password):
@@ -33,15 +33,15 @@ class Deployment:
     modules : list[Module] = []
 
 
-    def __init__(self, other : Deployment = None()):
-        if other != None():
-            self.minDockerVersion = f"{other.minDockerVersion}"
-            self.edgeAgentVersion = f"{other.edgeAgentVersion}"
-            self.edgeHubVersion = f"{other.edgeHubVersion}"
-            self.loggingOptions = f"{other.loggingOptions}"
+    def __init__(self, other : Deployment = None):
+        if other != None:
+            self.minDockerVersion = other.minDockerVersion
+            self.edgeAgentVersion = other.edgeAgentVersion
+            self.edgeHubVersion = other.edgeHubVersion
+            self.loggingOptions = other.loggingOptions
             self.__registryCredentials = {key: value.clone() for key,value in other.__registryCredentials.items()}
             self.modules = [m.clone() for m in other.modules]
-            return self
+            self.routeSettings = RouteSettings(other.routeSettings)
 
 
     def addRegistryCredentials(self, name,  address, username, password) -> None:
@@ -52,7 +52,7 @@ class Deployment:
 
     def saveToFile(self, path) -> None:
         file = open(path, "w")
-        file.write(self.toJson())
+        file.write(self.__asJson().toJSON())
         file.close()
 
     def merge(self : Deployment, other: Deployment ) -> Deployment:
@@ -62,7 +62,7 @@ class Deployment:
             if m.name not in [x.name for x in ret.modules]:
                 ret.modules.append(m)
 
-        ret.routeSettings.__merge(other.routeSettings)
+        ret.routeSettings._merge(other.routeSettings)
 
         return ret
 
@@ -70,19 +70,24 @@ class Deployment:
     def __asJson(self) -> JsonObject:
         json = JsonObject()
 
-        json["$schema-template"] = "2.0.0",
+        setattr(json, "$schema-template", "2.0.0")
         json.modulesContent = {}
 
         regCreds = {}
         for key, value in self.__registryCredentials.items():
             regCreds[key] = value.asJson()
 
+
+
         moduleJsonObjs = []
         for m in self.modules:
-            moduleJsonObjs.append(m.__asJson())
+            moduleJsonObjs.append(m._asJson())
+        test = JsonObject()
+        test.dupa = moduleJsonObjs
 
 
-        json.moduleContent["$edgeAgent"] = {
+        json.modulesContent = {}
+        json.modulesContent["$edgeAgent"] = {
             "properties.desired": {
                 "schemaVersion": "1.0",
                 "runtime": {
@@ -136,11 +141,12 @@ class Deployment:
             }
         }
 
-        json["$edgeHub"] = self.routeSettings.asJson().toJSON()
+
+        setattr(json, "$edgeHub", self.routeSettings._asJson())
 
         for m in self.modules:
             if m.desiredProperties:
-                json[m.name] = m.desiredProperties
+                setattr(json, m.name, m.desiredProperties)
 
         return json
 

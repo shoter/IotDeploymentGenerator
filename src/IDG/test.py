@@ -1,26 +1,28 @@
 from routeSettings import RouteSettings
 from jsonObject import JsonObject
 from module import Module
+from deployment import Deployment
 
-netdev = Module("netdev", "1.0", "someImage")
+a = Deployment()
 
-netdev.createOptions["HostConfig"] = {
+a.edgeAgentVersion = "2.0"
+moduleA = Module("test", "1.0", "someImage")
+moduleA.addEnvVariable("superVar", "ASDSAD")
+moduleA.desiredProperties["test"] = "123"
+moduleA.createOptions["HostConfig"] = {
     "Binds": [
-        "operator-api:/persistent-data"
-    ],
-    "ExtraHosts": [
-        "operator.priva.local:123",
-        "iam.priva.local:213"
-    ],
-    "PortBindings": {
-        "9000/tcp": [
-            {
-            "HostPort": "9000"
-            }
-        ]
-    }
+        "a:x",
+        "b:c"
+    ]
 }
 
-netdev.addEnvVariable("test", "asd")
+a.modules.append(moduleA)
 
-print(netdev.__asJson().toJSON())
+b = Deployment()
+b.edgeHubVersion = "3.0"
+moduleB = Module("moduleB", "3.0", "adsadsa")
+
+b.modules.append(moduleB)
+
+final = a.merge(b)
+final.saveToFile("deployment.debug.template.json")

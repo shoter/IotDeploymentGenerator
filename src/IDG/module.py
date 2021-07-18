@@ -1,5 +1,6 @@
-from jsonObject import JsonObject
 from __future__ import annotations
+from jsonObject import JsonObject
+
 import copy
 class Module:
 
@@ -22,16 +23,16 @@ class Module:
     def removeEnvVariable(self, key):
         if key in self.__env.keys : del self.__env[key]
 
-    def clone(self, other : Module) -> Module:
-        ret = Module()
-        ret.restartPolicy = f"{other.restartPolicy}"
-        ret.createOptions = copy.deepcopy(other.createOptions)
-        ret.desiredProperties = copy.deepcopy(other.desiredProperties)
-        ret.__env = copy.deepcopy(other.__env)
+    def clone(self) -> Module:
+        ret = Module(self.name, self.version, self.image)
+        ret.restartPolicy = f"{self.restartPolicy}"
+        ret.createOptions = copy.deepcopy(self.createOptions)
+        ret.desiredProperties = copy.deepcopy(self.desiredProperties)
+        ret.__env = copy.deepcopy(self.__env)
         return ret
 
 
-    def __asJson(self):
+    def _asJson(self):
         json = JsonObject()
         moduleContent = JsonObject()
         setattr(json, self.name, moduleContent)
