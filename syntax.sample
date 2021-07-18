@@ -1,0 +1,17 @@
+deployment = new Deployment()
+deployment.minDockerVersion = 1.25
+deployment.addRegistryCredentials("www", "us", "pas");
+
+deployment.edgeAgent.restartPolicy = 'x';
+// overrides port if exists?
+deployment.edgeAgent.createOptions.HostConfig.addPortBinding("5675", "5645");
+
+module = new Module("netdev");
+
+module.createOptions.HostConfig["binds"] = [ "x:y", "z:c" ];
+module.env["x"] = "asdsad";
+
+deployment.addModule(module);
+
+deployment.routes.add("xxx xtwqewqe to adsad");
+
