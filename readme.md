@@ -1,14 +1,15 @@
 # IDG - IoT Deployment Generator
 
-<!-- https://ecotrust-canada.github.io/markdown-toc/ -->
 - [IDG - IoT Deployment Generator](#idg---iot-deployment-generator)
-    + [Creating deployment](#creating-deployment)
+  * [Module](#module)
     + [Creating module](#creating-module)
     + [Setting HostConfig for module](#setting-hostconfig-for-module)
     + [Adding environment variable to module](#adding-environment-variable-to-module)
     + [Removing environment variable to module](#removing-environment-variable-to-module)
     + [Cloning module](#cloning-module)
     + [Adding module to deployment](#adding-module-to-deployment)
+  * [Deployment](#deployment)
+    + [Creating deployment](#creating-deployment)
     + [Removing module from deployment](#removing-module-from-deployment)
     + [Adding registry credential to deployment](#adding-registry-credential-to-deployment)
     + [Adding route to deployment](#adding-route-to-deployment)
@@ -20,13 +21,10 @@
 
 
 
-### Creating deployment
 
-Contains default deployment settings with edgeAgent and edgeHub initial settings.
 
-```
-deployment = Deployment()
-```
+
+## Module
 
 ### Creating module
 
@@ -94,6 +92,16 @@ Cloned module is going to be a deep copy of initial module.
 
 ```
 deployment.addModule(module)
+```
+
+## Deployment
+
+### Creating deployment
+
+Contains default deployment settings with edgeAgent and edgeHub initial settings.
+
+```
+deployment = Deployment()
 ```
 
 ### Removing module from deployment
