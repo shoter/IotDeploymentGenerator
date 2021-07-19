@@ -23,15 +23,15 @@ class Module:
 
     @property
     def HostConfig(self):
-        if "HostConfig" not in self.desiredProperties:
-            self.desiredProperties["HostConfig"] = {}
-        return self.desiredProperties["HostConfig"]
+        if "HostConfig" not in self.createOptions:
+            self.createOptions["HostConfig"] = {}
+        return self.createOptions["HostConfig"]
 
     @HostConfig.setter
     def HostConfig(self, value):
-        if "HostConfig" not in self.desiredProperties:
-            self.desiredProperties["HostConfig"] = {}
-        self.desiredProperties["HostConfig"] = value
+        if "HostConfig" not in self.createOptions:
+            self.createOptions["HostConfig"] = {}
+        self.createOptions["HostConfig"] = value
 
     def clone(self) -> Module:
         ret = Module(self.name, self.version, self.image)

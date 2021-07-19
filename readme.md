@@ -4,6 +4,7 @@
   * [Module](#module)
     + [Creating module](#creating-module)
     + [Setting HostConfig for module](#setting-hostconfig-for-module)
+    + [Setting desired properties for module](#setting-desired-properties-for-module)
     + [Adding environment variable to module](#adding-environment-variable-to-module)
     + [Removing environment variable to module](#removing-environment-variable-to-module)
     + [Cloning module](#cloning-module)
@@ -18,6 +19,7 @@
     + [Saving deployment to deployment template file](#saving-deployment-to-deployment-template-file)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 
 
 
@@ -40,7 +42,7 @@ module = Module("module_name", "1.0.0", "image_str")
 ### Setting HostConfig for module
 
 ```
-module.desiredProperties["HostConfig"] = {
+module.createOptions["HostConfig"] = {
             "Binds": [
             "volumeA:/somewhere"
         ],
@@ -55,7 +57,7 @@ module.desiredProperties["HostConfig"] = {
 another syntax:
 
 ```
-module.HostConfig = {
+module.createOptions = {
             "Binds": [
             "volumeA:/somewhere"
         ],
@@ -64,6 +66,16 @@ module.HostConfig = {
                 "HostPort": "9080"
             }]
         }
+}
+```
+
+
+### Setting desired properties for module
+
+```
+module.desiredProperties = {
+    "propertyA" : 123,
+    "propertyB" : "IamB"
 }
 ```
 
