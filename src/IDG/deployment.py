@@ -1,8 +1,8 @@
 from __future__ import annotations
 from typing import Dict
-from jsonObject import JsonObject
-from routeSettings import RouteSettings
-from module import Module
+from IDG.jsonObject import JsonObject
+from IDG.routeSettings import RouteSettings
+from IDG.module import Module
 
 
 class RegistryCredential:
@@ -11,11 +11,12 @@ class RegistryCredential:
         self.username = username
         self.password = password
 
-    def asJson(self):
+    def asJson(self) -> JsonObject:
         json = JsonObject()
         json.address = self.address
         json.username = self.username
         json.password = self.password
+        return json
 
     def clone(self) -> RegistryCredential:
         return RegistryCredential(self.address, self.username, self.password)
@@ -23,17 +24,14 @@ class RegistryCredential:
 
 class Deployment:
 
-    minDockerVersion : str = "v1.25"
-    edgeAgentVersion: str =  "1.0"
-    edgeHubVersion: str = "1.0"
-    loggingOptions: str = ""
-    routeSettings = RouteSettings()
-
-    __registryCredentials: Dict[str, RegistryCredential] = {}
-    modules : list[Module] = []
-
-
     def __init__(self, other : Deployment = None):
+        self.minDockerVersion = "v1.25"
+        self.edgeAgentVersion = "1.0"
+        self.edgeHubVersion = "1.0"
+        self.loggingOptions = ""
+        self.routeSettings : RouteSettings = RouteSettings()
+        self.__registryCredentials: Dict[str, RegistryCredential] = {}
+        self.modules : list[Module] = []
         if other != None:
             self.minDockerVersion = other.minDockerVersion
             self.edgeAgentVersion = other.edgeAgentVersion

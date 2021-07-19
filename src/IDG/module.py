@@ -1,13 +1,8 @@
 from __future__ import annotations
-from jsonObject import JsonObject
+from IDG.jsonObject import JsonObject
 
 import copy
 class Module:
-
-    restartPolicy = "always"
-    createOptions = {}
-    desiredProperties = {}
-    __env = {}
 
     def __init__(self, name, version, image):
         self.name = name
@@ -16,6 +11,9 @@ class Module:
         self.type = "docker"
         self.status = "running"
         self.restartPolicy = "always"
+        self.desiredProperties = {}
+        self.createOptions = {}
+        self.__env = {}
 
     def addEnvVariable(self, key, value):
         self.__env[key] = value

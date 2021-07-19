@@ -1,25 +1,26 @@
 from __future__ import annotations
 from typing import Dict
-from jsonObject import JsonObject
+from IDG.jsonObject import JsonObject
 
 class RouteSettings:
-    __routes: Dict[str, str] = {}
-    timeToLiveSecs = 7200
-
     def __init__(self, other : RouteSettings = None):
+        self._routes = {}
+        self.timeToLiveSecs = 7200
+        
         if other != None:
             self.timeToLiveSecs = other.timeToLiveSecs
             self._merge(other)
 
+
     def addRoute(self, name, route):
-        self.__routes[name] = route
+        self._routes[name] = route
 
     def removeRoute(self, name):
-        if name in self.__routes.keys : self.__routes.remove(name)
+        if name in self._routes.keys : self._routes.remove(name)
 
     def _merge(self, other : RouteSettings) -> None:
-        for name, route in other.__routes.items():
-            if name not in self.__routes.keys():
+        for name, route in other._routes.items():
+            if name not in self._routes.keys():
                 self.addRoute(name, route)
 
     def _asJson(self):
@@ -29,7 +30,7 @@ class RouteSettings:
         setattr(json, "properties.desired", propertiesDesired )
 
         propertiesDesired.schemaVersion = "1.0"
-        propertiesDesired.routes = self.__routes
+        propertiesDesired.routes = self._routes
 
         storeConf = JsonObject()
         propertiesDesired.storeAndForwardConfiguration = storeConf
