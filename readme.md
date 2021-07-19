@@ -1,5 +1,24 @@
 # IDG - IoT Deployment Generator
 
+<!-- https://ecotrust-canada.github.io/markdown-toc/ -->
+- [IDG - IoT Deployment Generator](#idg---iot-deployment-generator)
+    + [Creating deployment](#creating-deployment)
+    + [Creating module](#creating-module)
+    + [Setting HostConfig for module](#setting-hostconfig-for-module)
+    + [Adding environment variable to module](#adding-environment-variable-to-module)
+    + [Removing environment variable to module](#removing-environment-variable-to-module)
+    + [Cloning module](#cloning-module)
+    + [Adding module to deployment](#adding-module-to-deployment)
+    + [Removing module from deployment](#removing-module-from-deployment)
+    + [Adding registry credential to deployment](#adding-registry-credential-to-deployment)
+    + [Adding route to deployment](#adding-route-to-deployment)
+    + [Merging deployment](#merging-deployment)
+    + [Converting deployment into string](#converting-deployment-into-string)
+    + [Saving deployment to deployment template file](#saving-deployment-to-deployment-template-file)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
 
 ### Creating deployment
 
