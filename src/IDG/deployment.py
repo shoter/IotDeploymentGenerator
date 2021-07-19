@@ -31,19 +31,27 @@ class Deployment:
         self.loggingOptions = ""
         self.routeSettings : RouteSettings = RouteSettings()
         self.__registryCredentials: Dict[str, RegistryCredential] = {}
-        self.modules : list[Module] = []
+        self._modules : list[Module] = []
         if other != None:
             self.minDockerVersion = other.minDockerVersion
             self.edgeAgentVersion = other.edgeAgentVersion
             self.edgeHubVersion = other.edgeHubVersion
             self.loggingOptions = other.loggingOptions
             self.__registryCredentials = {key: value.clone() for key,value in other.__registryCredentials.items()}
-            self.modules = [m.clone() for m in other.modules]
+            self._modules = [m.clone() for m in other._modules]
             self.routeSettings = RouteSettings(other.routeSettings)
 
 
     def addRegistryCredentials(self, name,  address, username, password) -> None:
         self.__registryCredentials[name] = RegistryCredential(address, username, password)
+
+    def addModule(self : Deployment, module : Module) -> Deployment:
+        self._modules.append(module)
+        return self
+
+    def removeModule(self: Deployment, moduleName: str) -> Deployment:
+        self._modules = [m for m in self._modules if m.name == moduleName]
+        return self
 
     def toJson(self) -> str:
         self.__asJson().toJSON()
@@ -56,9 +64,9 @@ class Deployment:
     def merge(self : Deployment, other: Deployment ) -> Deployment:
         ret = Deployment(self)
 
-        for m in other.modules:
-            if m.name not in [x.name for x in ret.modules]:
-                ret.modules.append(m)
+        for m in other._modules:
+            if m.name not in [x.name for x in ret._modules]:
+                ret._modules.append(m)
 
         ret.routeSettings._merge(other.routeSettings)
 
@@ -78,7 +86,7 @@ class Deployment:
 
 
         moduleJsonObjs = {}
-        for m in self.modules:
+        for m in self._modules:
             moduleJsonObjs[m.name] = m._asJson()
 
 
@@ -139,7 +147,7 @@ class Deployment:
 
         json.modulesContent["$edgeHub"] = self.routeSettings._asJson()
 
-        for m in self.modules:
+        for m in self._modules:
             if m.desiredProperties:
                 json.modulesContent[m.name] = {
                     "properties.desired": m.desiredProperties

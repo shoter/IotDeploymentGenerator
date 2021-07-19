@@ -21,6 +21,18 @@ class Module:
     def removeEnvVariable(self, key):
         if key in self.__env.keys : del self.__env[key]
 
+    @property
+    def HostConfig(self):
+        if "HostConfig" not in self.desiredProperties:
+            self.desiredProperties["HostConfig"] = {}
+        return self.desiredProperties["HostConfig"]
+
+    @HostConfig.setter
+    def HostConfig(self, value):
+        if "HostConfig" not in self.desiredProperties:
+            self.desiredProperties["HostConfig"] = {}
+        self.desiredProperties["HostConfig"] = value
+
     def clone(self) -> Module:
         ret = Module(self.name, self.version, self.image)
         ret.restartPolicy = f"{self.restartPolicy}"

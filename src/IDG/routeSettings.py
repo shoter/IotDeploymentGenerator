@@ -6,7 +6,7 @@ class RouteSettings:
     def __init__(self, other : RouteSettings = None):
         self._routes = {}
         self.timeToLiveSecs = 7200
-        
+
         if other != None:
             self.timeToLiveSecs = other.timeToLiveSecs
             self._merge(other)
