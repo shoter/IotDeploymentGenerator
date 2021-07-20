@@ -1,5 +1,8 @@
 # IDG - IoT Deployment Generator
 
+[![PyPI version](https://badge.fury.io/py/IoT-Deployment-Generator.svg)](https://badge.fury.io/py/IoT-Deployment-Generator)
+
+
 Library used to create [Azure IoT Edge deployment templates](https://docs.microsoft.com/en-us/azure/iot-edge/module-composition?view=iotedge-2020-11) with python code. 
 
 ## Table of contents
