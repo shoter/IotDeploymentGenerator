@@ -14,6 +14,7 @@ Library used to create [Azure IoT Edge deployment templates](https://docs.micros
   * [Required imports](#required-imports)
   * [Module documentation](#module-documentation)
     + [Creating module](#creating-module)
+    + [Changing miscellaneous settings of module](#changing-miscellaneous-settings-of-module)
     + [Setting HostConfig for module](#setting-hostconfig-for-module)
     + [Setting desired properties for module](#setting-desired-properties-for-module)
     + [Adding environment variable to module](#adding-environment-variable-to-module)
@@ -21,15 +22,19 @@ Library used to create [Azure IoT Edge deployment templates](https://docs.micros
     + [Cloning module](#cloning-module)
   * [Deployment documentation](#deployment-documentation)
     + [Creating deployment](#creating-deployment)
+    + [Changing miscellaneous settings of deployment](#changing-miscellaneous-settings-of-deployment)
     + [Adding module to deployment](#adding-module-to-deployment)
     + [Removing module from deployment](#removing-module-from-deployment)
     + [Adding registry credential to deployment](#adding-registry-credential-to-deployment)
     + [Adding route to deployment](#adding-route-to-deployment)
+    + [Changing storeAndForwardConfiguration inside edgeHub configuration](#changing-storeandforwardconfiguration-inside-edgehub-configuration)
     + [Merging deployment](#merging-deployment)
     + [Converting deployment into string](#converting-deployment-into-string)
     + [Saving deployment to deployment template file](#saving-deployment-to-deployment-template-file)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
 
 
 
@@ -75,7 +80,7 @@ Below you will find all settings you can change inside module:
 module.type = "docker"
 module.status = "running"
 module.restartPolicy = "always"
-``
+```
 
 ### Setting HostConfig for module
 
