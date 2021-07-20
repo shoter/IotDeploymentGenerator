@@ -51,4 +51,4 @@ deployment.addModule(AzureBlobStorageonIoTEdge)
 deployment.addModule(TestWebApp)
 
 # Saving
-deployment.saveToFile("deployment.debug.template.json")
+deployment.saveToFile("output.json")
