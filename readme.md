@@ -5,16 +5,20 @@ Library used to create [Azure IoT Edge deployment templates](https://docs.micros
 ## Table of contents
 
 - [IDG - IoT Deployment Generator](#idg---iot-deployment-generator)
-  * [Module](#module)
+  * [Table of contents](#table-of-contents)
+  * [Library dependencies](#library-dependencies)
+  * [Installing](#installing)
+  * [required imports](#required-imports)
+  * [Module documentation](#module-documentation)
     + [Creating module](#creating-module)
     + [Setting HostConfig for module](#setting-hostconfig-for-module)
     + [Setting desired properties for module](#setting-desired-properties-for-module)
     + [Adding environment variable to module](#adding-environment-variable-to-module)
     + [Removing environment variable to module](#removing-environment-variable-to-module)
     + [Cloning module](#cloning-module)
-    + [Adding module to deployment](#adding-module-to-deployment)
-  * [Deployment](#deployment)
+  * [Deployment documentation](#deployment-documentation)
     + [Creating deployment](#creating-deployment)
+    + [Adding module to deployment](#adding-module-to-deployment)
     + [Removing module from deployment](#removing-module-from-deployment)
     + [Adding registry credential to deployment](#adding-registry-credential-to-deployment)
     + [Adding route to deployment](#adding-route-to-deployment)
@@ -25,11 +29,27 @@ Library used to create [Azure IoT Edge deployment templates](https://docs.micros
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 
+
 ## Library dependencies
 
 None
 
+## Installing
 
+In order to install the library you need to execute following command:
+
+```
+pip install IoT-Deployment-Generator==0.0.9
+```
+
+## required imports
+
+It is the best to use following imports when working with IDG:
+
+```
+from IDG.deployment import Deployment
+from IDG.module import Module
+```
 
 ## Module documentation
 
@@ -105,11 +125,6 @@ clonedModule = module.clone()
 
 Cloned module is going to be a deep copy of initial module.
 
-### Adding module to deployment
-
-```
-deployment.addModule(module)
-```
 
 ## Deployment documentation
 
@@ -119,6 +134,12 @@ Contains default deployment settings with edgeAgent and edgeHub initial settings
 
 ```
 deployment = Deployment()
+```
+
+### Adding module to deployment
+
+```
+deployment.addModule(module)
 ```
 
 ### Removing module from deployment
