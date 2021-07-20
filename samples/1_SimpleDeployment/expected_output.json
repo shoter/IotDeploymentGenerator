@@ -1,0 +1,145 @@
+{
+    "$schema-template": "2.0.0",
+    "modulesContent": {
+        "$edgeAgent": {
+            "properties.desired": {
+                "modules": {
+                    "AzureBlobStorageonIoTEdge": {
+                        "env": {
+                            "LOCAL_STORAGE_ACCOUNT_NAME": {
+                                "value": "iotblob"
+                            }
+                        },
+                        "restartPolicy": "always",
+                        "settings": {
+                            "createOptions": {
+                                "HostConfig": {
+                                    "PortBindings": {
+                                        "11002/tcp": [
+                                            {
+                                                "HostPort": "11002"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "image": "mcr.microsoft.com/azure-blob-storage:latest"
+                        },
+                        "status": "running",
+                        "type": "docker",
+                        "version": "1.0"
+                    },
+                    "IotEdgeModule1": {
+                        "env": {},
+                        "restartPolicy": "always",
+                        "settings": {
+                            "createOptions": {},
+                            "image": "${MODULEDIR<../IotEdgeModule1>}"
+                        },
+                        "status": "running",
+                        "type": "docker",
+                        "version": "1.0.0"
+                    },
+                    "SimulatedTemperatureSensor": {
+                        "env": {
+                            "MessageCount": {
+                                "value": "10000"
+                            }
+                        },
+                        "restartPolicy": "always",
+                        "settings": {
+                            "createOptions": {},
+                            "image": "mcr.microsoft.com/azureiotedge-simulated-temperature-sensor:1.0"
+                        },
+                        "status": "running",
+                        "type": "docker",
+                        "version": "1.0"
+                    },
+                    "TestWebApp": {
+                        "env": {},
+                        "restartPolicy": "always",
+                        "settings": {
+                            "createOptions": {},
+                            "image": "${MODULEDIR<../TestWebApp>}"
+                        },
+                        "status": "running",
+                        "type": "docker",
+                        "version": "1.0.0"
+                    }
+                },
+                "runtime": {
+                    "settings": {
+                        "loggingOptions": "",
+                        "minDockerVersion": "v1.25",
+                        "registryCredentials": {}
+                    },
+                    "type": "docker"
+                },
+                "schemaVersion": "1.0",
+                "systemModules": {
+                    "edgeAgent": {
+                        "settings": {
+                            "image": "mcr.microsoft.com/azureiotedge-agent:1.0"
+                        },
+                        "type": "docker"
+                    },
+                    "edgeHub": {
+                        "restartPolicy": "always",
+                        "settings": {
+                            "createOptions": {
+                                "HostConfig": {
+                                    "PortBindings": {
+                                        "443/tcp": [
+                                            {
+                                                "HostPort": "443"
+                                            }
+                                        ],
+                                        "5671/tcp": [
+                                            {
+                                                "HostPort": "5671"
+                                            }
+                                        ],
+                                        "8883/tcp": [
+                                            {
+                                                "HostPort": "8883"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "image": "mcr.microsoft.com/azureiotedge-hub:1.0"
+                        },
+                        "status": "running",
+                        "type": "docker"
+                    }
+                }
+            }
+        },
+        "$edgeHub": {
+            "properties.desired": {
+                "routes": {
+                    "moduleToWebApp": "FROM /messages/modules/IotEdgeModule1/outputs/temp INTO BrokeredEndpoint(\"/modules/TestWebApp/inputs/mytemp\")",
+                    "sensorToIotEdgeModule1": "FROM /messages/modules/SimulatedTemperatureSensor/outputs/temperatureOutput INTO BrokeredEndpoint(\"/modules/TestWebApp/inputs/mytemp\")"
+                },
+                "schemaVersion": "1.0",
+                "storeAndForwardConfiguration": {
+                    "timeToLiveSecs": 7200
+                }
+            }
+        },
+        "AzureBlobStorageonIoTEdge": {
+            "properties.desired": {
+                "deviceToCloudUploadProperties": {
+                    "deleteAfterUpload": true,
+                    "storageContainersForUpload": {
+                        "abc": {
+                            "target": "cba"
+                        }
+                    },
+                    "uploadOn": true,
+                    "uploadOrder": "OldestFirst"
+                }
+            }
+        }
+    }
+}
