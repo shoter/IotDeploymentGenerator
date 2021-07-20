@@ -67,6 +67,16 @@ module = Module("module_name", "1.0.0", "image_str")
 - image_str represents image which is used inside deployment template.
     - As it is template you can refer to modules inside solution to load them. exxample: `${MODULEDIR<../some_module>}`
 
+### Changing miscellaneous settings of module
+
+Below you will find all settings you can change inside module:
+
+```
+module.type = "docker"
+module.status = "running"
+module.restartPolicy = "always"
+``
+
 ### Setting HostConfig for module
 
 ```
@@ -139,6 +149,18 @@ Contains default deployment settings with edgeAgent and edgeHub initial settings
 deployment = Deployment()
 ```
 
+
+### Changing miscellaneous settings of deployment
+
+Below you will find all settings you can change inside deployment:
+
+```
+deployment.minDockerVersion = "v1.25"
+deployment.edgeAgentVersion = "1.0"
+deployment.edgeHubVersion = "1.0"
+deployment.loggingOptions = ""
+```
+
 ### Adding module to deployment
 
 ```
@@ -163,6 +185,12 @@ deployment.addRegistryCredentials("credential_name", "repo_address", "repo_usern
 
 ```
 deployment.routeSettings.addRoute("routeName", "ROM /messages/modules/someModule/outputs/* into $upstream")
+```
+
+### Changing storeAndForwardConfiguration inside edgeHub configuration
+
+```
+deployment.routeSettings.timeToLiveSecs = 7200
 ```
 
 ### Merging deployment
