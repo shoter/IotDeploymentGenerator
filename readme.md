@@ -39,7 +39,7 @@ None
 In order to install the library you need to execute following command:
 
 ```
-pip install IoT-Deployment-Generator=
+pip install IoT-Deployment-Generator
 ```
 
 ## Required imports
