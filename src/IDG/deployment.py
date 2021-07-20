@@ -70,6 +70,10 @@ class Deployment:
 
         ret.routeSettings._merge(other.routeSettings)
 
+        for key, value in other.__registryCredentials.items():
+            if key not in self.__registryCredentials:
+                self.__registryCredentials[key] = value
+
         return ret
 
 

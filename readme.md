@@ -1,5 +1,9 @@
 # IDG - IoT Deployment Generator
 
+Library used to create [Azure IoT Edge deployment templates](https://docs.microsoft.com/en-us/azure/iot-edge/module-composition?view=iotedge-2020-11) with python code. 
+
+## Table of contents
+
 - [IDG - IoT Deployment Generator](#idg---iot-deployment-generator)
   * [Module](#module)
     + [Creating module](#creating-module)
@@ -21,12 +25,13 @@
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 
+## Library dependencies
+
+None
 
 
 
-
-
-## Module
+## Module documentation
 
 ### Creating module
 
@@ -106,7 +111,7 @@ Cloned module is going to be a deep copy of initial module.
 deployment.addModule(module)
 ```
 
-## Deployment
+## Deployment documentation
 
 ### Creating deployment
 
