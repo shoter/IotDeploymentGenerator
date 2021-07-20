@@ -7,8 +7,8 @@ Library used to create [Azure IoT Edge deployment templates](https://docs.micros
 - [IDG - IoT Deployment Generator](#idg---iot-deployment-generator)
   * [Table of contents](#table-of-contents)
   * [Library dependencies](#library-dependencies)
-  * [Installing](#installing)
-  * [required imports](#required-imports)
+  * [Installation](#installation)
+  * [Required imports](#required-imports)
   * [Module documentation](#module-documentation)
     + [Creating module](#creating-module)
     + [Setting HostConfig for module](#setting-hostconfig-for-module)
@@ -34,15 +34,15 @@ Library used to create [Azure IoT Edge deployment templates](https://docs.micros
 
 None
 
-## Installing
+## Installation
 
 In order to install the library you need to execute following command:
 
 ```
-pip install IoT-Deployment-Generator==0.0.9
+pip install IoT-Deployment-Generator=
 ```
 
-## required imports
+## Required imports
 
 It is the best to use following imports when working with IDG:
 
