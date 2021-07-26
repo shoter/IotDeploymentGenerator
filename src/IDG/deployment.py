@@ -50,7 +50,7 @@ class Deployment:
         return self
 
     def removeModule(self: Deployment, moduleName: str) -> Deployment:
-        self._modules = [m for m in self._modules if m.name == moduleName]
+        self._modules = [m for m in self._modules if m.name != moduleName]
         return self
 
     def toJson(self) -> str:
