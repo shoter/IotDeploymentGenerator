@@ -100,7 +100,7 @@ module.createOptions["HostConfig"] = {
 another syntax:
 
 ```
-module.createOptions = {
+module.HostConfig = {
             "Binds": [
             "volumeA:/somewhere"
         ],
