@@ -19,7 +19,7 @@ Library used to create [Azure IoT Edge deployment templates](https://docs.micros
     + [Setting NetorkingConfig for module](#setting-netorkingconfig-for-module)
     + [Setting desired properties for module](#setting-desired-properties-for-module)
     + [Adding environment variable to module](#adding-environment-variable-to-module)
-    + [Removing environment variable to module](#removing-environment-variable-to-module)
+    + [Removing environment variable from module](#removing-environment-variable-from-module)
     + [Cloning module](#cloning-module)
   * [Deployment documentation](#deployment-documentation)
     + [Creating deployment](#creating-deployment)
@@ -146,7 +146,7 @@ module.addEnvVariable("env_name", "env_value")
 ```
 
 
-### Removing environment variable to module
+### Removing environment variable from module
 
 ```
 module.removeEnvVariable("env_name")
