@@ -59,7 +59,13 @@
                         "env": {},
                         "restartPolicy": "always",
                         "settings": {
-                            "createOptions": {},
+                            "createOptions": {
+                                "NetworkingConfig": {
+                                    "EndpointsConfig": {
+                                        "host": {}
+                                    }
+                                }
+                            },
                             "image": "${MODULEDIR<../TestWebApp>}"
                         },
                         "status": "running",

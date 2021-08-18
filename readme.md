@@ -86,14 +86,14 @@ module.restartPolicy = "always"
 
 ```
 module.createOptions["HostConfig"] = {
-            "Binds": [
-            "volumeA:/somewhere"
-        ],
-        "PortBindings": {
-            "8080/tcp": [{
-                "HostPort": "9080"
-            }]
-        }
+        "Binds": [
+        "volumeA:/somewhere"
+    ],
+    "PortBindings": {
+        "8080/tcp": [{
+            "HostPort": "9080"
+        }]
+    }
 }
 ```
 
@@ -101,14 +101,34 @@ another syntax:
 
 ```
 module.HostConfig = {
-            "Binds": [
-            "volumeA:/somewhere"
-        ],
-        "PortBindings": {
-            "8080/tcp": [{
-                "HostPort": "9080"
-            }]
-        }
+        "Binds": [
+        "volumeA:/somewhere"
+    ],
+    "PortBindings": {
+        "8080/tcp": [{
+            "HostPort": "9080"
+        }]
+    }
+}
+```
+
+### Setting NetorkingConfig for module
+
+```
+module.createOptions["NetworkingConfig"] = {
+        "EndpointsConfig": {
+        "host": {}
+    }
+}
+```
+
+another syntax:
+
+```
+module.NetworkingConfig = {
+        "EndpointsConfig": {
+        "host": {}
+    }
 }
 ```
 

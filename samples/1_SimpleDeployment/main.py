@@ -39,6 +39,12 @@ AzureBlobStorageonIoTEdge.addEnvVariable("LOCAL_STORAGE_ACCOUNT_NAME", "iotblob"
 # Test Web App
 TestWebApp = Module("TestWebApp", "1.0.0", "${MODULEDIR<../TestWebApp>}")
 
+TestWebApp.NetworkingConfig = {
+        "EndpointsConfig": {
+            "host": {}
+        }
+}
+
 # Routes
 deployment.routeSettings.addRoute("moduleToWebApp", "FROM /messages/modules/IotEdgeModule1/outputs/temp INTO BrokeredEndpoint(\"/modules/TestWebApp/inputs/mytemp\")")
 deployment.routeSettings.addRoute("sensorToIotEdgeModule1", "FROM /messages/modules/SimulatedTemperatureSensor/outputs/temperatureOutput INTO BrokeredEndpoint(\"/modules/TestWebApp/inputs/mytemp\")")
