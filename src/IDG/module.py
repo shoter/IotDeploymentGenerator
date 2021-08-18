@@ -33,6 +33,18 @@ class Module:
             self.createOptions["HostConfig"] = {}
         self.createOptions["HostConfig"] = value
 
+    @property
+    def NetworkingConfig(self):
+        if "NetworkingConfig" not in self.createOptions:
+            self.createOptions["NetworkingConfig"] = {}
+        return self.createOptions["NetworkingConfig"]
+
+    @NetworkingConfig.setter
+    def NetworkingConfig(self, value):
+        if "NetworkingConfig" not in self.createOptions:
+            self.createOptions["NetworkingConfig"] = {}
+        self.createOptions["NetworkingConfig"] = value
+
     def clone(self) -> Module:
         ret = Module(self.name, self.version, self.image)
         ret.restartPolicy = f"{self.restartPolicy}"
