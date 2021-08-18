@@ -16,6 +16,7 @@ Library used to create [Azure IoT Edge deployment templates](https://docs.micros
     + [Creating module](#creating-module)
     + [Changing miscellaneous settings of module](#changing-miscellaneous-settings-of-module)
     + [Setting HostConfig for module](#setting-hostconfig-for-module)
+    + [Setting NetorkingConfig for module](#setting-netorkingconfig-for-module)
     + [Setting desired properties for module](#setting-desired-properties-for-module)
     + [Adding environment variable to module](#adding-environment-variable-to-module)
     + [Removing environment variable to module](#removing-environment-variable-to-module)
@@ -33,10 +34,6 @@ Library used to create [Azure IoT Edge deployment templates](https://docs.micros
     + [Saving deployment to deployment template file](#saving-deployment-to-deployment-template-file)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
-
-
-
 
 ## Library dependencies
 
