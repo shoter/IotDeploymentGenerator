@@ -16,9 +16,10 @@ Library used to create [Azure IoT Edge deployment templates](https://docs.micros
     + [Creating module](#creating-module)
     + [Changing miscellaneous settings of module](#changing-miscellaneous-settings-of-module)
     + [Setting HostConfig for module](#setting-hostconfig-for-module)
+    + [Setting NetorkingConfig for module](#setting-netorkingconfig-for-module)
     + [Setting desired properties for module](#setting-desired-properties-for-module)
     + [Adding environment variable to module](#adding-environment-variable-to-module)
-    + [Removing environment variable to module](#removing-environment-variable-to-module)
+    + [Removing environment variable from module](#removing-environment-variable-from-module)
     + [Cloning module](#cloning-module)
   * [Deployment documentation](#deployment-documentation)
     + [Creating deployment](#creating-deployment)
@@ -33,10 +34,6 @@ Library used to create [Azure IoT Edge deployment templates](https://docs.micros
     + [Saving deployment to deployment template file](#saving-deployment-to-deployment-template-file)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
-
-
-
 
 ## Library dependencies
 
@@ -86,14 +83,14 @@ module.restartPolicy = "always"
 
 ```
 module.createOptions["HostConfig"] = {
-            "Binds": [
-            "volumeA:/somewhere"
-        ],
-        "PortBindings": {
-            "8080/tcp": [{
-                "HostPort": "9080"
-            }]
-        }
+        "Binds": [
+        "volumeA:/somewhere"
+    ],
+    "PortBindings": {
+        "8080/tcp": [{
+            "HostPort": "9080"
+        }]
+    }
 }
 ```
 
@@ -101,14 +98,34 @@ another syntax:
 
 ```
 module.HostConfig = {
-            "Binds": [
-            "volumeA:/somewhere"
-        ],
-        "PortBindings": {
-            "8080/tcp": [{
-                "HostPort": "9080"
-            }]
-        }
+        "Binds": [
+        "volumeA:/somewhere"
+    ],
+    "PortBindings": {
+        "8080/tcp": [{
+            "HostPort": "9080"
+        }]
+    }
+}
+```
+
+### Setting NetorkingConfig for module
+
+```
+module.createOptions["NetworkingConfig"] = {
+        "EndpointsConfig": {
+        "host": {}
+    }
+}
+```
+
+another syntax:
+
+```
+module.NetworkingConfig = {
+        "EndpointsConfig": {
+        "host": {}
+    }
 }
 ```
 
@@ -129,7 +146,7 @@ module.addEnvVariable("env_name", "env_value")
 ```
 
 
-### Removing environment variable to module
+### Removing environment variable from module
 
 ```
 module.removeEnvVariable("env_name")
