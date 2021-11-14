@@ -1,4 +1,6 @@
 from unittest import TestCase
+from IDG.jsonObject import JsonObject
+from typing import Dict
 
 from IDG.module import Module
 
@@ -18,10 +20,10 @@ class ModuleShould(TestCase):
         module = Module("name", "version", "image")
         module.addEnvVariable("key", "someVal")
 
-        json = module._asJson()
-        self.assertTrue(hasattr(json.env, "key"))
-        env = json.env.key
-        self.assertEqual(env.value, "someVal")
+        json : JsonObject = module._asJson()
+        self.assertTrue("key" in json.env)
+        env = json.env["key"]
+        self.assertEqual(env["value"], "someVal")
 
     def test_removeEnvironmentVariable(self):
         module = Module("name", "version", "image")
