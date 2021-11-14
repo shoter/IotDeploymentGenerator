@@ -19,7 +19,7 @@ class Module:
         self.__env[key] = value
 
     def removeEnvVariable(self, key):
-        if key in self.__env.keys : del self.__env[key]
+        self.__env.pop(key)
 
     @property
     def HostConfig(self):
