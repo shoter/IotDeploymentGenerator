@@ -12,6 +12,8 @@ Library used to create [Azure IoT Edge deployment templates](https://docs.micros
   * [Library dependencies](#library-dependencies)
   * [Installation](#installation)
   * [Required imports](#required-imports)
+  * [Module development](#module-development)
+    + [Running tests](#running-tests)
   * [Module documentation](#module-documentation)
     + [Creating module](#creating-module)
     + [Changing miscellaneous settings of module](#changing-miscellaneous-settings-of-module)
@@ -35,6 +37,7 @@ Library used to create [Azure IoT Edge deployment templates](https://docs.micros
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
+
 ## Library dependencies
 
 None
@@ -54,6 +57,23 @@ It is the best to use following imports when working with IDG:
 ```
 from IDG.deployment import Deployment
 from IDG.module import Module
+```
+
+
+## Module development
+
+### Running tests
+
+First please install tox package
+
+```
+pip install tox
+```
+
+Then use following command to test module:
+
+```
+python -m tox
 ```
 
 ## Module documentation
