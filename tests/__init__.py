@@ -1,1 +1,2 @@
 from tests.module_should import ModuleShould
+from tests.routeSettings_should import RouteSettingsShould

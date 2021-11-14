@@ -1,0 +1,1 @@
+from IDG.exceptions.DotInNameException import DotInNameException

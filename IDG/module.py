@@ -1,5 +1,6 @@
 from __future__ import annotations
 from IDG.jsonObject import JsonObject
+from IDG.exceptions import DotInNameException
 
 import copy
 class Module:
@@ -14,6 +15,7 @@ class Module:
         self.desiredProperties = {}
         self.createOptions = {}
         self.__env = {}
+        _checkModule(self)
 
     def addEnvVariable(self, key, value):
         self.__env[key] = value
@@ -78,10 +80,7 @@ class Module:
 
         return json
 
-        
 
-
-        
-
-
-
+def _checkModule(module : Module):
+    if "." in module.name:
+        raise DotInNameException("Module name cannot contain dots in the name")

@@ -1,10 +1,11 @@
 from __future__ import annotations
 from typing import Dict
+from IDG.exceptions import DotInNameException
 from IDG.jsonObject import JsonObject
 
 class RouteSettings:
     def __init__(self, other : RouteSettings = None):
-        self._routes = {}
+        self._routes : Dict[str, str] = {}
         self.timeToLiveSecs = 7200
 
         if other != None:
@@ -13,6 +14,7 @@ class RouteSettings:
 
 
     def addRoute(self, name, route):
+        _checkRoute(name, route)
         self._routes[name] = route
 
     def removeRoute(self, name):
@@ -38,10 +40,6 @@ class RouteSettings:
 
         return json
 
-
-
-
-
-
-
-
+def _checkRoute(key: str, value: str):
+    if "." in value:
+        raise DotInNameException("Route cannot have dots")
