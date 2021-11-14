@@ -1,0 +1,1 @@
+from tests.module_should import ModuleShould

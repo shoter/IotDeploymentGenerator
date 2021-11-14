@@ -16,10 +16,12 @@ class Module:
         self.__env = {}
 
     def addEnvVariable(self, key, value):
+        print("dupa1")
         self.__env[key] = value
 
     def removeEnvVariable(self, key):
-        if key in self.__env.keys : del self.__env[key]
+        print("dupa")
+        self.__env.pop(key)
 
     @property
     def HostConfig(self):
