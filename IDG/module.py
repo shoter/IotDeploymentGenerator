@@ -15,7 +15,7 @@ class Module:
         self.desiredProperties = {}
         self.createOptions = {}
         self.__env = {}
-        _checkModule(self)
+        # _checkModule(self)
 
     def addEnvVariable(self, key, value):
         self.__env[key] = value
